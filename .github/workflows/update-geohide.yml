@@ -44,3 +44,4 @@ jobs:
             -H "Content-Type: application/json" \
             -d "{\"files\": {\"geohide-clean-hosts.txt\": {\"content\": \"$(sed 's/\"/\\\"/g' geohide-clean-hosts.txt)\"}}}" \
             https://api.github.com/gists/e66f78b36faf1c9951b3c4c8edfefa57
+
