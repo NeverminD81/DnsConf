@@ -2,7 +2,7 @@ name: Update GeoHide Clean Hosts
 
 on:
   schedule:
-    - cron: "0 */6 * * *"   # обновление каждые 6 часов
+    - cron: "0 */6 * * *"
   workflow_dispatch:
 
 jobs:
@@ -24,24 +24,19 @@ jobs:
 
       - name: Clean and convert
         run: |
-          sed 's/#.*$//' raw_hosts.txt | \
-          sed 's/:443//g' | \
-          sed 's/:80//g' | \
-          sed 's/=.*//g' | \
-          sed 's/\*\.//g' | \
-          grep -E '^[a-z0-9.-]+\s+[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' | \
-          grep -vE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\s+[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' | \
-          grep -vE '^localhost' | \
-          grep -vE '^0\.0\.0\.0' | \
+          awk '!/^#/ && NF>=2 {print $2}' raw_hosts.txt | \
+          grep -E '^[a-z0-9.-]+$' | \
+          grep -vE '^localhost$' | \
+          grep -vE '^local$' | \
           sort -u > geohide-clean-hosts.txt
 
       - name: Upload to Gist
         env:
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
         run: |
+          CONTENT=$(sed 's/"/\\"/g' geohide-clean-hosts.txt)
           curl -X PATCH \
             -H "Authorization: token $GIST_TOKEN" \
             -H "Content-Type: application/json" \
-            -d "{\"files\": {\"geohide-clean-hosts.txt\": {\"content\": \"$(sed 's/\"/\\\"/g' geohide-clean-hosts.txt)\"}}}" \
+            -d "{\"files\": {\"geohide-clean-hosts.txt\": {\"content\": \"$CONTENT\"}}}" \
             https://api.github.com/gists/e66f78b36faf1c9951b3c4c8edfefa57
-
