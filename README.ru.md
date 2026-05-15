@@ -1,6 +1,11 @@
 🌐 Languages: [󠁧󠁢󠁥󠁮󠁧󠁿**English**](README.md) | [**Русский**](README.ru.md)
 
+
+[![oosmetrics](https://api.oosmetrics.com/api/v1/badge/achievement/3187ce37-9f15-4a93-8978-670bf41a42ca.svg)](https://oosmetrics.com/repo/noVibe/DnsConf)<br>
+[![Last Build](../../actions/workflows/github_action.yml/badge.svg?branch=main)](../../actions/workflows/github_action.yml)<br>
+
 # Конфигуратор блокировок и перенаправлений DNS
+
 **Позволяет настраивать правила перенаправления и блокировок сайтов для аккаунтов Cloudflare и NextDNS.**
 
 **Может работать через GitHub Actions. Ничего скачивать, устанавливать не нужно!** 
