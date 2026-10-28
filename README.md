@@ -251,3 +251,24 @@ Previously generated data is removed **ONLY** when both `BLOCK` and `REDIRECT` s
   `.github/workflows/github_action.yml`
 + You can run the action manually via `Run workflow` button: switch to _Actions_ tab and choose workflow named **DNS
   Block&Redirect Configurer cron task**
+
+---
+
+## Keep the action running
+
+GitHub disables scheduled workflows in a public repository
+[if there has been no activity in it for 60 days](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+Your fork is a public repository. **A scheduled run is not counted as activity**. Therefore, approximately once every two months
+you need to run it manually.
+
+**How to check:** Click the badge below (the same one is at the top of the README) to go to the run history.<br>
+[![Last Build](../../actions/workflows/github_action.yml/badge.svg?branch=main)](../../actions/workflows/github_action.yml)<br>
+A disabled workflow will have a notice that scheduled runs are turned off. In the run history (workflow runs), you can see the date of the last run.
+
+**How to turn it on again:**
+Click the badge above and press the Run Workflow button<br>
+_Or_: _Actions_ tab → workflow **DNS Block&Redirect Configurer cron task** → **Enable workflow** button.<br>
+Reconfiguring via the configurator https://dns-conf-ui.vercel.app also enables the workflow.
+
+Keep in mind that proxy IPs change over time, so in a fork that has been disabled for a long time, the rules remain
+outdated until the first successful run.

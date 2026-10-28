@@ -291,3 +291,26 @@ https://www.youtube.com/watch?v=vbAXM_xAL5I
   Чтобы изменить время, отредактируйте cron в `.github/workflows/github_action.yml`
 + **Action** можно запустить вручную через кнопку **Run workflow**:  
   вкладка _Actions_ → workflow **DNS Block&Redirect Configurer cron task**
+
+---
+
+## Как не потерять автозапуск
+
+GitHub отключает workflow с расписанием в публичном репозитории,
+[если в нём 60 дней не было активности](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
+Ваш форк — это публичный репозиторий. **Запуск по расписанию активностью не считается**. Поэтому, примерно раз в два месяца
+необходимо производить запуск вручную.
+
+**Как проверить:** Кликните на бейдж ниже (в начале README есть точно такой же), чтобы перейти к истории запусков.<br>
+[![Last Build](../../actions/workflows/github_action.yml/badge.svg?branch=main)](../../actions/workflows/github_action.yml)<br>
+У отключённого workflow будет пометка, что запуски по расписанию выключены. В истории запусков (workflow runs) можно увидеть дату последнего пуска.
+
+**Как включить обратно:** 
+Кликните на бейдж выше и нажмите кнопку Run Workflow<br>
+_Или_: вкладка _Actions_ → workflow **DNS Block&Redirect Configurer cron task** → кнопка **Enable
+workflow**.<br>
+Повторная настройка через конфигуратор https://dns-conf-ui.vercel.app тоже включает workflow.
+
+Учтите, что IP прокси со временем меняются, поэтому в форке, который долго простоял отключённым, правила остаются
+устаревшими до первого успешного запуска.
+
